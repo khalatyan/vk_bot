@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: vkbot-redis
+    expose:
+     - "6379"
+    ports:
+      - "6379:6379"
+
+  bot:
+    build: ./bot
+    container_name: vkbot-app
+    depends_on:
+      - redis
+    restart: always

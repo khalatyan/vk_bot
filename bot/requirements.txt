@@ -1,0 +1,5 @@
+vk_api
+redis
+fastapi
+uvicorn
+httpx
