@@ -17,4 +17,6 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - VK_TOKEN=${VK_TOKEN}
+      - MANAGER_IDS=${MANAGER_IDS}
     restart: always
