@@ -6,8 +6,8 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 # Конфигурация
 VK_TOKEN = "vk1.a.N7R1ZzqehaEqsQrCTop1_0393i_IMXb1d97egeL-hknSFeKE5t7SrQ6nRol9C6DAQIXZv8tfzN_LJ0CpKFLzfNo5pHiuFaLtaGZVaqp7jrw7Ge44hOPOtQIOu0XAInESC50z7idvWh9cVRojXS6fUNDNgSGr4qrPFnHxSOH1JuLuNdaoSW2efZeDyWdab1D_cJr7-Ode4QTp8R_F9cxBXQ"
 GROUP_ID = 230001293  # Укажите ID вашего сообщества
-MANAGER_ID = 321555079  # ID менеджера для получения заявок
-REDIS_HOST = "redis"
+MANAGER_IDS = [321555079]
+REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 SESSION_TTL = 3600  # 1 час
 
@@ -51,9 +51,8 @@ def start_bot():
             r.expire(key, SESSION_TTL)
 
             if not stage:
-                send_message(user_id, "Привет! 😊 это бот нашего курса Рекрутер от Р до Р, твоя новая удаленная профессия. Чтобы оставить заявку, напишите слово — ДА, и наш менеджер свяжется с вами!")
                 r.hset(key, "stage", "wait_for_consent")
-                continue
+                stage = "wait_for_consent"
 
             text = event.text.strip().lower()
 
@@ -62,7 +61,7 @@ def start_bot():
                     send_message(user_id, "Отлично! Напишите, пожалуйста, ваш вопрос менеджеру:")
                     r.hset(key, "stage", "ask_question")
                 else:
-                    send_message(user_id, "Пожалуйста, напишите ДА, чтобы оставить заявку.")
+                    send_message(user_id, "Привет! 😊 Это бот нашего курса Рекрутер от Р до Р — твоя новая удалённая профессия. Чтобы оставить заявку, напишите слово — ДА, и наш менеджер свяжется с вами!")
 
             elif stage == "ask_question":
                 r.hset(key, "question", event.text)
@@ -100,18 +99,19 @@ def start_bot():
                         f"Город: {city}\n"
                         f"Вопрос: {question}"
                     )
-                    send_message(MANAGER_ID, summary)
+                    for manager_id in MANAGER_IDS:
+                        send_message(manager_id, summary)
                     send_message(user_id, "Спасибо! Наш менеджер скоро свяжется с вами!")
                     r.delete(key)
                 else:
                     send_message(user_id, "Пожалуйста, введите корректное название города.")
 
-        elif event.type == VkEventType.GROUP_JOIN:
-            user_id = event.user_id
-            key = f"user:{user_id}"
-            send_message(user_id, "Привет! 😊 это бот нашего курса Рекрутер от Р до Р, твоя новая удаленная профессия. Чтобы оставить заявку, напишите слово — ДА, и наш менеджер свяжется с вами!")
-            r.hset(key, "stage", "wait_for_consent")
-            r.expire(key, SESSION_TTL)
+        # elif event.type == VkEventType.GROUP_JOIN:
+        #     user_id = event.user_id
+        #     key = f"user:{user_id}"
+        #     send_message(user_id, "Привет! 😊 это бот нашего курса Рекрутер от Р до Р, твоя новая удаленная профессия. Чтобы оставить заявку, напишите слово — ДА, и наш менеджер свяжется с вами!")
+        #     r.hset(key, "stage", "wait_for_consent")
+        #     r.expire(key, SESSION_TTL)
 
 if __name__ == "__main__":
     start_bot()
