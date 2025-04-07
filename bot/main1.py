@@ -51,14 +51,13 @@ def validate_city(city):
 def send_message(user_id, message):
     vk.messages.send(user_id=user_id, message=message, random_id=0)
 
-def clear_expired_sessions():
-    for key in r.keys("user:*"):
-        if r.ttl(key) == -1:
-            r.delete(key)
+# def clear_expired_sessions():
+#     for key in r.keys("user:*"):
+#         if r.ttl(key) == -1:
+#             r.delete(key)
 
 @app.post("/callback")
 async def callback(event: VKEvent | None = None):
-    clear_expired_sessions()
 
     if event.secret and event.secret != VK_SECRET:
         return Response(content="invalid secret", media_type="text/plain")

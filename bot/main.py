@@ -42,7 +42,6 @@ def clear_expired_sessions():
 
 def start_bot():
     for event in longpoll.listen():
-        clear_expired_sessions()
 
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             user_id = event.user_id
@@ -93,7 +92,7 @@ def start_bot():
                     question = r.hget(key, "question")
 
                     summary = (
-                        f"Новая заявка от пользователя {user_id}\n"
+                        f"Новая заявка от пользователя https://vk.ru/id{user_id}\n"
                         f"ФИО: {name}\n"
                         f"Телефон: {phone}\n"
                         f"Город: {city}\n"
