@@ -4,9 +4,9 @@ import redis
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 # Конфигурация
-VK_TOKEN = "vk1.a.N7R1ZzqehaEqsQrCTop1_0393i_IMXb1d97egeL-hknSFeKE5t7SrQ6nRol9C6DAQIXZv8tfzN_LJ0CpKFLzfNo5pHiuFaLtaGZVaqp7jrw7Ge44hOPOtQIOu0XAInESC50z7idvWh9cVRojXS6fUNDNgSGr4qrPFnHxSOH1JuLuNdaoSW2efZeDyWdab1D_cJr7-Ode4QTp8R_F9cxBXQ"
-GROUP_ID = 230001293  # Укажите ID вашего сообщества
-MANAGER_IDS = [321555079]
+VK_TOKEN = "vk1.a.eOPbWls0EX6UZtShsBPC1-0zLPlM3jdqalpPELbR9-fugFAXSbFIakYEDf6axzK6mROKtR3tRFN_F1bhD1s2NAPlfywIQIz6GSa83rPo1uLXWB11C_vaTUr2ofMsVWCpigSE159RA4e9besVebLSRRc6U7S0Sq4_k0CRcmFSD0Ra7WonZNWopVelJYoMBlVrUoby6KF6xhfZpwniVuevPg"
+GROUP_ID = 225244314  # Укажите ID вашего сообщества
+MANAGER_IDS = [37199556, 143586526]
 REDIS_HOST = "redis"
 REDIS_PORT = 6379
 SESSION_TTL = 3600  # 1 час
