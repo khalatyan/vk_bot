@@ -6,7 +6,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 # Конфигурация
 VK_TOKEN = "vk1.a.eOPbWls0EX6UZtShsBPC1-0zLPlM3jdqalpPELbR9-fugFAXSbFIakYEDf6axzK6mROKtR3tRFN_F1bhD1s2NAPlfywIQIz6GSa83rPo1uLXWB11C_vaTUr2ofMsVWCpigSE159RA4e9besVebLSRRc6U7S0Sq4_k0CRcmFSD0Ra7WonZNWopVelJYoMBlVrUoby6KF6xhfZpwniVuevPg"
 GROUP_ID = 225244314  # Укажите ID вашего сообщества
-MANAGER_IDS = [37199556, 143586526]
+MANAGER_IDS = [143586526]
 REDIS_HOST = "redis"
 REDIS_PORT = 6379
 SESSION_TTL = 3600  # 1 час
