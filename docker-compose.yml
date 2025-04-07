@@ -14,4 +14,7 @@ services:
     container_name: vkbot-app
     depends_on:
       - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     restart: always
